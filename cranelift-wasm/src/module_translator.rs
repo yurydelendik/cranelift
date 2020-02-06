@@ -8,6 +8,7 @@ use crate::sections_translator::{
 };
 use crate::state::ModuleTranslationState;
 use cranelift_codegen::timing;
+use std::string::String;
 use wasmparser::{CustomSectionContent, ModuleReader, SectionContent};
 
 /// Translate a sequence of bytes forming a valid Wasm binary into a list of valid Cranelift IR
@@ -69,7 +70,7 @@ pub fn translate_module<'data>(
 
             SectionContent::DataCount(_) => {
                 return Err(WasmError::InvalidWebAssembly {
-                    message: "don't know how to handle the data count section yet",
+                    message: String::from("don't know how to handle the data count section yet"),
                     offset: reader.current_position(),
                 });
             }

@@ -17,6 +17,7 @@ use cranelift_codegen::ir::{self, InstBuilder};
 use cranelift_codegen::isa::TargetFrontendConfig;
 use cranelift_frontend::FunctionBuilder;
 use std::boxed::Box;
+use std::string::String;
 use thiserror::Error;
 use wasmparser::BinaryReaderError;
 use wasmparser::Operator;
@@ -54,7 +55,7 @@ pub enum WasmError {
     #[error("Invalid input WebAssembly code at offset {offset}: {message}")]
     InvalidWebAssembly {
         /// A string describing the validation error.
-        message: &'static str,
+        message: String,
         /// The bytecode offset where the error occurred.
         offset: usize,
     },
@@ -89,7 +90,8 @@ macro_rules! wasm_unsupported {
 impl From<BinaryReaderError> for WasmError {
     /// Convert from a `BinaryReaderError` to a `WasmError`.
     fn from(e: BinaryReaderError) -> Self {
-        let BinaryReaderError { message, offset } = e;
+        let message = String::from(e.message());
+        let offset = e.offset();
         Self::InvalidWebAssembly { message, offset }
     }
 }

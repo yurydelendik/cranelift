@@ -1445,6 +1445,18 @@ pub fn translate_operator<FE: FuncEnvironment + ?Sized>(
         | Operator::I8x16Mul
         | Operator::I64x2Mul
         | Operator::I64x2ShrS
+        | Operator::I8x16MinS
+        | Operator::I16x8MinS
+        | Operator::I32x4MinS
+        | Operator::I8x16MinU
+        | Operator::I16x8MinU
+        | Operator::I32x4MinU
+        | Operator::I8x16MaxS
+        | Operator::I16x8MaxS
+        | Operator::I32x4MaxS
+        | Operator::I8x16MaxU
+        | Operator::I16x8MaxU
+        | Operator::I32x4MaxU
         | Operator::I32x4TruncSatF32x4S
         | Operator::I32x4TruncSatF32x4U
         | Operator::I64x2TruncSatF64x2S
